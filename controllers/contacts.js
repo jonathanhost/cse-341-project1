@@ -52,7 +52,7 @@ const updateContact = async (req, res) => {
     birthday:req.body.firstName,
   }
   const response = await mongodb.getDatabase().db().collection('contacts').replaceOne({ _id: contactId }, contact);
-  if(response.modifiedCount < 0 ){
+  if(response.modifiedCount > 0 ){
     res.status(204).send();
   }
   else{
@@ -65,7 +65,7 @@ const deleteContact = async (req, res) => {
   //#swagger-tags=['contacts']
    const contactId = new ObjectId(req.params.id);
   const response = await mongodb.getDatabase().db().collection('contacts').deleteOne({ _id: contactId }, true);
-  if(response.deleteCount < 0 ){
+  if(response.deleteCount > 0 ){
     res.status(204).send();
   }
   else{
